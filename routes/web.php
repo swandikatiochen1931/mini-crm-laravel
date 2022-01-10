@@ -29,5 +29,14 @@ Route::delete('/companies/destroy/{id}', [App\Http\Controllers\CompaniesControll
 
 Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index'])->name('employees')->middleware('auth');
 
-Route::get('/kirimemail', [App\Http\Controllers\MailController::class, 'index'])->name('mail');
+Route::get('/kirimemail/{company_id}', [App\Http\Controllers\MailController::class, 'index'])->name('mail');
+Route::get('/send-mail', function () {
+
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+
+    \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\MyTestMail($details));
+});
 Auth::routes();

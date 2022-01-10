@@ -58,6 +58,10 @@ class CompaniesController extends Controller
         }
         $company->save();
 
+        // Kirim email
+        $mail = new MailController;
+        $mail->index($company->id);
+
         return back();
     }
 

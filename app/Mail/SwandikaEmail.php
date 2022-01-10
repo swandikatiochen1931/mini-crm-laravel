@@ -11,14 +11,16 @@ class SwandikaEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $details;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($details)
     {
-        
+        $this->details = $details;
     }
 
     /**
@@ -28,12 +30,14 @@ class SwandikaEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('swandikatio97@gmail.com')
-                   ->view('email')
-                   ->with(
-                    [
-                        'nama' => 'Swandika Tio',
-                        'website' => 'swandika.com',
-                    ]);
+        // return $this->from('swandikatio97@gmail.com')
+        //            ->view('email')
+        //            ->with(
+        //             [
+        //                 'nama' => 'Swandika Tio',
+        //                 'website' => 'swandika.com',
+        //             ]);
+        return $this->subject('Mini CRM Laravel')
+            ->view('emails.company');
     }
 }
