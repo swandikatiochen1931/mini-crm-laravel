@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Companies extends Model
 {
-  protected $table = "Companies";
+  protected $table = "companies";
   protected $primaryKey = "id";
   protected $fillable = [
     'id', 'name', 'email', 'logo', 'website'
