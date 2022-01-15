@@ -28,6 +28,10 @@ Route::post('/companies/update/{id}', [App\Http\Controllers\CompaniesController:
 Route::delete('/companies/destroy/{id}', [App\Http\Controllers\CompaniesController::class, 'destroy'])->name('companies.destroy');
 
 Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index'])->name('employees')->middleware('auth');
+Route::get('/employees/edit/{id}', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employees.edit');
+Route::post('/employees/store', [App\Http\Controllers\EmployeeController::class, 'store'])->name('employees.store');
+Route::post('/employees/update/{id}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('employees.update');
+Route::delete('/employees/destroy/{id}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('employees.destroy');
 
 Route::get('/kirimemail/{company_id}', [App\Http\Controllers\MailController::class, 'index'])->name('mail');
 Route::get('/send-mail', function () {

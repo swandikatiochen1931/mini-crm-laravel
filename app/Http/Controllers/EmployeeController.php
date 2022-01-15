@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Companies;
 use Illuminate\Http\Request;
 use App\Models\Employees;
 
@@ -15,8 +16,9 @@ class EmployeeController extends Controller
     public function index()
     {
         $data = Employees::paginate(10);
+        $companies = Companies::all();
 
-        return view('employee.index')->with(['data' => $data]);
+        return view('employee.index')->with(['data' => $data, 'companies' => $companies]);
     }
 
     /**
@@ -37,7 +39,17 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new Employees();
+
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->company = $request->company;
+        $employee->email = $request->email;
+        $employee->phone = $request->phone;
+
+        if ($employee->save()) {
+            return back();
+        }
     }
 
     /**
@@ -59,7 +71,11 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employees::find($id);
+        $data = Employees::paginate(10);
+        $companies = Companies::all();
+
+        return view('employee.index')->with(['employee' => $employee, 'data' => $data, 'companies' => $companies]);
     }
 
     /**
@@ -71,7 +87,17 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = Employees::find($id);
+
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->company = $request->company;
+        $employee->email = $request->email;
+        $employee->phone = $request->phone;
+
+        if ($employee->save()) {
+            return back();
+        }
     }
 
     /**
@@ -82,6 +108,10 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employees::find($id);
+
+        $employee->delete();
+
+        return back();
     }
 }
