@@ -18,7 +18,7 @@
                             <select name="company" class="form-control">
                                 <option selected disabled>Select company</option>
                                 @foreach ($companies as $item)
-                                    @if($employee->company == $item->id)
+                                    @if($employee ?? false && $employee->company == $item->id)
                                         <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                                     @else
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
